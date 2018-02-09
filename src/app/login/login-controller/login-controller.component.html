@@ -1,0 +1,18 @@
+
+<div id="login">
+  <form>
+    <div class="imgcontainer">
+      MIS      
+    </div>
+    <div class="container">
+      <label><b>Username</b></label>
+      <input type="text" placeholder="Enter LoginId" name="LoginId" [(ngModel)]="LoginId" required>
+
+      <label><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="LoginPassword" [(ngModel)]="LoginPassword" required>
+
+      <button type="button" (click)="login()">Login</button>
+    </div>
+
+  </form>
+</div>

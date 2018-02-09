@@ -1,0 +1,22 @@
+<div id="appEmployeePopUp" class="overlay">
+  <div class="popup">
+    <h2>승인 심사</h2>
+    <button class="close" (click)="popupAppyn(false)">&times;</button>
+  
+    <div class="approval" style="text-align:center;">
+        <div class="pure-u-1-2">
+          <label for="yn">승인여부 </label>
+          <select id="yn" name="approval_yn" class="pure-input-1" style="height:52%;" [(ngModel)]="yns" >
+            <option *ngFor="let yn of approval_yn" [value]="yn.value"  required>{{yn.name}}</option>
+          </select>
+        </div>
+        
+        <div class="pure-u-1">
+          <label for="position">승인 또는 반려 사유 </label>
+          <br />
+          <textarea cols="71" rows="6" [(ngModel)]="approval_description"></textarea>
+        </div>
+        <button type="button" (click)="approvalYN()">확인</button>
+    </div>
+  </div>
+</div>

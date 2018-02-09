@@ -1,0 +1,44 @@
+<div id="refEmployeePopUp" class="overlay">
+  <div class="popup">
+    <h2>참조자 검색</h2>
+    <button class="close" (click)="refView()">&times;</button>
+  
+      <div class="reference" style="text-align:center;">
+        <div id="dd" style="margin:0 auto; margin-top:30px; margin-bottom:30px;">
+          <form class="pure-form">
+          <fieldset>
+            <input typx="text" name="searchName" class="pure-input-rounded" style="text-align:center; align:right;" [(ngModel)]="searchName">
+            <button type="button" class="pure-button" style="vertical-align:middle" (click) =" searchList()">검색
+            </button>
+          </fieldset>
+        </form>
+        </div>
+        <div id="ss" style="width:80%; margin:0 auto; margin-bottom:30px; text-align:left;
+         ">
+          <label for="refEmployees" style="text-align:left;">참조할 사람</label>
+          <div id="refEmployees" name="refName" style="margin:0 auto; border: 1px solid black; text-align:center;">{{refName}}
+            <div>
+              <button type="button" class="pure-button" style="margin-top:30px;" (click)="refComplete()" >확인</button>
+            </div>
+          </div>
+          <!-- button(확인) 클릭시 결재 등록 페이지로 넘어감 -->
+        </div>
+        <div id="xx">
+           <table cellspacing="0">
+             <tr>
+               <th>이름</th>
+               <th>부서</th>
+               <th>메일</th>
+               <th>추가</th>
+             </tr>
+             <tr *ngFor="let employee of employees">
+               <td><span>{{employee.name}}</span></td>
+               <td><span>{{employee.department}}</span></td>
+               <td><span>{{employee.email}}</span></td>
+               <td style="text-align:center;"><button type="button" class="pure-button" (click)="addRef(employee.id, employee.name)">추가</button></td>
+             </tr>
+           </table>
+          <!--검색시 리스트 참조할 사람 리스트 검색-->
+        </div>
+  </div>
+</div>

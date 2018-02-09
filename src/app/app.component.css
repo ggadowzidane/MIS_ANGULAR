@@ -1,0 +1,62 @@
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.button-success {
+    background: rgb(28, 184, 65); /* this is a green */
+}
+
+.button-error {
+    background: rgb(202, 60, 60); /* this is a maroon */
+}
+
+.button-warning {
+    background: rgb(223, 117, 20); /* this is an orange */
+}
+
+.button-secondary {
+    background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+.container{}
+.container>*{}
+.container>.content>*{}
+
+.container .content{
+  padding-left:200px;
+  overflow:hidden;
+}
+
+.contentLogin{
+  padding-left:0;
+}
+
+.container .content>*{
+  float:left;
+  padding-bottom:600px;
+  margin-bottom:-600px;
+}
+.container footer{
+  clear: both; /*float에 영향을 받지 않게되는 속성*/
+}
+.container .content main{
+  width:100%;
+}
+/* 화면의 width가 600px보다 작으면 실행 
+  그리고 선언위치 중요 */
+@media(max-width:599px){
+  .container .content>*{
+    float:none;
+    padding-bottom:0px;
+    margin-bottom:0;
+  }
+  .container .content{
+    padding-left:0;
+    overflow:visible;
+  }
+}

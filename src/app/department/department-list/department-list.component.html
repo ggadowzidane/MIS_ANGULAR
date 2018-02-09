@@ -1,0 +1,41 @@
+<div id="main_content">
+  <div id="main_title">
+    <span>메뉴 > 부서관리</span>
+  </div>
+  <hr size="1px" color="#47c9af">
+  <div id="main_view">
+    <div id="main_view_top">
+      <div id="main_view_top_nav">
+        <label for="pageCount">전체 개수 :</label>
+        <select id="pageCount"  class="pure-input-1-2" [(ngModel)]="pageCount" (click)="pageCountClick()">
+          <option *ngFor="let count of pageCounts" [value]="count"  >{{count}}</option>
+        </select>
+        <button id="reverseCheckbox" class="button button-3d" (click)="checkBox()">전체선택</button>
+        <button class="button button-3d" (click)="popupAdd(true)">등 록</button>
+        <button class="button button-3d" (click)="deleteDepartment()">삭 제</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+    <div id="main_view_bottom">
+      <table class="responstable">
+        <tr>
+          <th style="width:10%;"><input type="checkbox" (click)="checkBox()" [(ngModel)]="tableCheck"></th>
+          <th style="width:15%;">부서명</th>
+          <th style="width:15%;">부서 대표</th>
+          <th style="width:60%;">부서 설명</th>
+        </tr>
+        <tr *ngFor="let list of departmentList">
+          <td><input type="checkbox" data-id="{{list.code}}" #departmentCheckbox/></td>
+          <td><a (click)="popupView(true,list.code)">{{list.name}}</a></td>
+          <td>{{list.representation}}</td>
+          <td>{{list.description}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<router-outlet>
+  <app-department-add *ngIf="addView"></app-department-add>
+  <app-department-edit *ngIf="editView" [departmentCode]="departmentCode"></app-department-edit>
+  <app-department-view *ngIf="viewView" [departmentCode]="departmentCode" (changeViewEditReverse)="reverseView($event)"></app-department-view>
+</router-outlet>

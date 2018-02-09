@@ -1,0 +1,68 @@
+<div id="VacationAddPopUp" class="overlay">
+  <div class="popup">
+    <h2>- 부서 등록 -</h2>
+    <button class="close" (click)="addView()">&times;</button>
+  
+      <div class="VacationAdd">
+        <form class="pure-form pure-form-stacked">
+          <fieldset>
+            <div class="pure-g">
+              <div class="pure-u-2">
+                <label for="type" id="type" class="pure-input-1-2" placeholder="휴가 종류" style="display:inline;">휴가 종류: </label>
+                <select id="type" name="ApprovalVacationType" name="ApprovalVacationType" class="pure-input-2" [(ngModel)]="vacationAdd.ApprovalVacationType">
+                  <option *ngFor="let type of types" [value]="type" [ngSwitch]="type">
+                    <span *ngSwitchCase="'1'">반차</span>
+                    <span *ngSwitchCase="'2'">연차</span>
+                    <span *ngSwitchCase="'3'">공가</span>
+                  </option>
+                </select>
+              </div>
+              <div class="pure-u-1">
+                <label for="startDay">시작 일 ~ 종료 일 :</label>
+                <input type="text" id="startDay" name="ApprovalStartDate" style="display:inline;" class="pure-input-1-1" [(ngModel)]="vacationAdd.ApprovalStartDate">
+                ~
+                <input type="text" id="endDay" name="ApprovalEndDate" style="display:inline;" class="pure-input-1-1" [(ngModel)]="vacationAdd.ApprovalEndDate">
+              </div>
+              <div class="pure-u-1">
+                <label for="requestDescription">휴가 사유</label>
+                <textarea id="requestDescription" class="pure-input-1-2" name="ApprovalRequestDescription"
+ [(ngModel)]="vacationAdd.ApprovalRequestDescription"></textarea>
+              </div>
+              
+              <div class="pure-u-1">
+                <label for="phone">전화번호</label>
+                <select id="phone" name="phoneFirst" class="pure-input-1-4" style="display:inline;" [(ngModel)]="phoneFirst">
+                  <option *ngFor="let first of phoneOption" [value]="first">{{first}}</option>
+                </select>
+                <input type="text" id="phone" name="phone_second" class="pure-input-1-4" style="display:inline;" maxlength="4" size="4" pattern="^[0-9]*S" [(ngModel)]="phoneSecond" (ngModelChange)="phoneChange()" >
+                <input type="text" id="phone" name="phone_third" class="pure-input-1-4" style="display:inline;" 
+                maxlength="4" size="4" pattern="^[0-9]*S" [(ngModel)]="phoneThird" (ngModelChange)="phoneChange()" >
+              </div>
+              
+              <div class="pure-u-1">
+                <label for="reference">참조자</label>
+                <input type="text" id="reference" name="refName" class="pure-input-1-2"  style="display:inline;" disabled [(ngModel)]="refName">
+                <button class="button-secondary pure-button" (click)="popupRef(true)" >검색</button>    
+              </div>
+              
+              <div class="pure-u-1">
+                <label for="approval">승인자</label>
+                <input type="text" id="approval" name="appName" class="pure-input-1-2"  style="display:inline;" disabled [(ngModel)]="appName">
+                <button class="button-secondary pure-button" (click)="popupApp(true)" >검색</button>    
+              </div>
+              
+              <div id="buttonLayout">
+                <button class="button-success pure-button" style="margin:10px;" (click)="add()" >요 청</button>
+                <button (click)="addView()" class="button-success pure-button" style="margin:10px;">닫 기</button>
+              </div>
+              
+            </div>
+          </fieldset>
+        </form>
+      </div>
+  </div>
+</div>
+<router-outlet>
+  <app-reference *ngIf="refView" ></app-reference>
+  <app-approval  *ngIf="appView"></app-approval>
+</router-outlet>

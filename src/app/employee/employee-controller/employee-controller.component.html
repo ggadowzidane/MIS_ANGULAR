@@ -1,0 +1,53 @@
+
+  <div id="main_content">
+    <div id="main_title">
+      <span>메뉴 > 사원관리</span>
+    </div>
+    <hr size="1px" color="#47c9af">
+    <div id="main_view">
+      <!-- 메인 화면중 상단의 전체개수, 전체선택, 사원삭제, 사원추가 검색-->
+      <div id="main_view_top">
+        <div id="main_view_top_nav">
+          <label for="pageCount">전체 개수 :</label>
+          <select id="pageCount"  class="pure-input-1-2" [(ngModel)]="pageCount" (click)="pageCountClick()">
+            <option *ngFor="let count of pageCounts" [value]="count"  >{{count}}</option>
+          </select>
+          <button id="reverseCheckbox" class="button button-3d" (click)="checkBox()">전체선택</button>
+          <button class="button button-3d" (click)="deleteEmployee()">사원삭제</button>
+          <button class="button button-3d" (click)="popupAdd(true)">사원 추가</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <form class="pure-form">
+            <input type="text">
+            <button type="submit" class="pure-button">Search</button>
+          </form>
+        </div>
+      </div>
+      <div id="main_view_bottom">
+        <div class="main_view_bottom_employeelist">
+          <div class="employe_info_flex" *ngFor="let list of employeeList">
+            <div class="employee_thumbnail">
+              <img [src]="employeeUrl" class="thumbnail_size">
+            </div>
+            <input type="checkbox" style="float:right; margin-right:20px; margin-top: 20px;" data-id="{{list.id}}" #employeeCheckbox/>
+            <div class="employee_info">
+              <!--<a [routerLink]="['employeeView',list.id]">-->
+              <a (click)="popupView(true,list.id)">
+                <label for="employeeName">이름 :</label>
+                <span id="employeeName">{{list.name}}</span>
+              </a><br />
+              <label for="employeeDepartment">부서 :</label>
+              <span id="employeeDepartment">{{list.department}}</span><br />
+              <label for="employeePosition">직급 :</label>
+              <span id="employeePosition">{{list.position}}</span><br />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div>
+<router-outlet>
+  <app-employee-add *ngIf="addView"></app-employee-add>
+  <app-employee-edit *ngIf="editView" [employeeId]="employeeId"></app-employee-edit>
+  <app-employee-view *ngIf="viewView" [employeeId]="employeeId" (changeViewEditReverse)="reverseView($event)"></app-employee-view>
+</router-outlet>

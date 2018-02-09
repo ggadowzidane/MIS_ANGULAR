@@ -1,0 +1,92 @@
+<!-- 관리자 사원 조회 팝업창 -->
+    <div id="vacationPopUp" class="overlay">
+      <div class="popup">
+          <h2>- 휴가 조회 -</h2>
+          <button class="close" (click)="viewView()">&times;</button>
+          <div class="vacationView">
+              <div id="vacationInfo">
+                <div class="pure-g">
+                 
+                  <div class="pure-u-1-2">
+                    <label for="EmployeeName">이름: </label>
+                    <span id="EmployeeName">한대운</span>
+                    
+                    <label for="vacationType" style="margin-left:20%;">휴가 종류: </label>
+                    <span id="vacationType" *ngIf="approval.state == 1">반차</span>
+                    <span id="vacationType" *ngIf="approval.state == 2">연차</span>
+                    <span id="vacationType" *ngIf="approval.state == 3">공가</span>
+                  </div>
+                  
+                  <br />
+
+                  <div class="pure-u-1">
+                    <label for="vacationDate">휴가 날짜:</label>
+                    <span id="vacationDate">{{approval.approval_data.ApprovalStartDate}} ~ {{approval.approval_data.ApprovalEndDate}}</span>
+                  </div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <div class="pure-u-1">
+                    <label for="phone">연락처:</label>
+                    <span id="phone">{{approval.approval_data.ApprovalEmployeePhone}}</span>
+                    
+                    <label for="request_date" style="margin-left:20%;">신청일:</label>
+                    <span id="vacationStartDate">{{approval.request_date}}</span>
+                  </div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <div class="pure-u-1">
+                    <label for="approval_yn">휴가 승인 여부:</label>
+                    <span id="approval_yn" *ngIf="approval.approval_data.ApprovalYn == 'Y'">승인</span>
+                    <span id="email" *ngIf="approval.approval_data.ApprovalYn == 'N'">미승인</span>
+                    
+                    <label for="approval_date" style="margin-left:20%;">휴가 승인 날짜:</label>
+                    <span id="email">{{approval.approval_date}}</span>
+                  </div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <div class="pure-u-1">
+                    <label for="reference_employee_code">참조자 목록:</label>
+                    <span id="reference_employee_code">{{approval.reference_employee_id}}</span>
+                  </div>
+
+                  <br />
+                  <div class="pure-u-1">
+                    <label for="approval_employee_code">승인자: </label>
+                    <span id="approval_employee_code">{{approval.approval_employee_id}}</span>
+                  </div>
+                  
+                  <br />
+                  <div class="pure-u-1">
+                    <label for="position">휴가 사유 </label>
+                    <br />
+                    <p style="border:1px solid;">
+                      {{approval.approval_data.ApprovalRequestDescription}}
+                    </p>
+                  </div>
+                
+                  <br />
+                  <div class="pure-u-1">
+                    <label for="return_description">승인 또는 반려 사유 
+                    </label>
+                    <br />
+                    <p style="border:1px solid">
+                      {{approval.hold_description
+}}
+                    </p>
+                  </div>
+ 
+                </div>
+                <br /><br />
+                <div id="buttonList">
+                   <!-- 승인 완료일 경우 수정,삭제는 disabled -->
+                 <!-- <button class="button-success pure-button" style="margin-left:100px;" (click)="viewEditReverse();" *ngIf="approval.approval_data.ApprovalYn=='N'">수정</button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button class="button-warning pure-button" *ngIf="approval.approval_data.ApprovalYn=='N'" >삭제</button>-->
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button class="button-warning pure-button" (click)="viewView()">닫기</button>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- 관리자 사원 조회 팝업창 -->

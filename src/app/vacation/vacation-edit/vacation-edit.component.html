@@ -1,0 +1,106 @@
+<!-- 관리자 사원 조회 팝업창 -->
+    <div id="vacationPopUp" class="overlay">
+      <div class="popup">
+          <h2>- 휴가 수정 -</h2>
+          <button class="close" (click)="editView();">&times;</button>
+          <div class="vacationView">
+              <div id="vacationInfo">
+                <div class="pure-g">
+                 
+                  <div class="pure-u-1-2">
+                    <label for="EmployeeName">이름: </label>
+                    <span id="EmployeeName">한대운</span>
+                    
+                    <label for="type" id="type" class="pure-input-1-2" placeholder="휴가 종류" style="display:inline;">휴가 종류: </label>
+                    <!--<select id="type" name=""  class="pure-input-2">
+                      <option *ngFor="let type of types" [value]="approval.approval_data.ApprovalVacationType" [(ngModel)] [ngSwitch]="type">
+                        <span *ngSwitchCase="'1'">반차</span>
+                        <span *ngSwitchCase="'2'">연차</span>
+                        <span *ngSwitchCase="'3'">공가</span>
+                      </option>
+                    </select>-->
+                    <span id="type" *ngIf="approval.approval_data.ApprovalVacationType == 1">반차</span>
+                    <span id="type" *ngIf="approval.approval_data.ApprovalVacationType == 2">연차</span>
+                    <span id="type"*ngIf="approval.approval_data.ApprovalVacationType == 3">병가</span>
+                  </div>
+                  
+                  <br />
+
+                  <div class="pure-u-1">
+                    <label for="vacationDate">휴가 날짜:</label>
+                    <input type="text"  [(ngModel)]="start_date">~<input type="text" [(ngModel)]="end_date">
+                  </div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <div class="pure-u-1">
+                    <div class="pure-u-1">
+                      <label for="phone">전화번호</label>
+                      <select id="phone" name="phoneFirst" class="pure-input-1-4" style="display:inline;" [(ngModel)]="phoneFirst">
+                        <option *ngFor="let first of phoneOption" [value]="first">{{first}}</option>
+                      </select>
+                      <input type="text" id="phone" name="phone_second" class="pure-input-1-4" style="display:inline;" maxlength="4" size="4" pattern="^[0-9]*S" [(ngModel)]="phoneSecond" (ngModelChange)="phoneChange()"  >
+                      <input type="text" id="phone" name="phone_third" class="pure-input-1-4" style="display:inline;" 
+                      maxlength="4" size="4" pattern="^[0-9]*S" [(ngModel)]="phoneThird" (ngModelChange)="phoneChange()" >
+                    </div>
+                    <br />
+                    <label for="request_date">신청일:</label>
+                    <span id="vacationStartDate">2016.12.31</span>
+                  </div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <div class="pure-u-1">
+                    <label for="approval_yn">휴가 승인 여부:</label>
+                    <span id="email">미승인</span>
+                    
+                    <label for="approval_date" style="margin-left:20%;">휴가 승인 날짜:</label>
+                    <span id="email">2017.01.01</span>
+                  </div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                  <div class="pure-u-1">
+                    <label for="reference">참조자</label>
+                    <input type="text" id="reference" name="refName" class="pure-input-1-2"  style="display:inline;" disabled [(ngModel)]="refName">
+                    <button class="button-secondary pure-button" (click)="popupRef(true)" >검색</button>    
+                  </div>
+
+                  <br />
+                  <div class="pure-u-1">
+                    <label for="approval">승인자</label>
+                    <input type="text" id="approval" name="appName" class="pure-input-1-2"  style="display:inline;" disabled [(ngModel)]="appName">
+                    <button class="button-secondary pure-button" (click)="popupApp(true)" >검색</button>    
+                  </div>
+                  
+                  <br />
+                  <div class="pure-u-1">
+                    <label for="position">휴가 사유 </label>
+                    <br />
+                    <textarea cols="71" rows="6" [(ngModel)]="request_description"></textarea>
+                  </div>
+                
+                  <br />
+                  <div class="pure-u-1">
+                    <label for="return_description">승인 또는 반려 사유 
+                    </label>
+                    <br />
+                    <p style="border:1px solid">
+                      안됩니다.
+                    </p>
+                  </div>
+ 
+                </div>
+                <br /><br />
+                <div id="buttonList">
+                   <!-- 승인 완료일 경우 수정,삭제는 disabled -->
+                  <button class="button-success pure-button" style="margin-left:100px;" (click)="edit();">수정 완료</button>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <button class="button-warning pure-button" (click)="editView();" >닫기</button>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    
+<router-outlet>
+  <app-reference *ngIf="refView" ></app-reference>
+  <app-approval  *ngIf="appView"></app-approval>
+</router-outlet>

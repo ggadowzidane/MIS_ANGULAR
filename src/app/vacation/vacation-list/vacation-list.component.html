@@ -1,0 +1,114 @@
+<div id="main_content">
+  <div id="main_title">
+    <span> 메뉴 > 휴가 결재 관리 > 휴가 결재 리스트</span>
+  </div>
+  <hr size="1px" color="#47c9af">
+  <div id="main_view">
+    <div id="main_view_top">
+      <div id="vacation_view_top_search">
+        <label for="name">이름 : </label>
+        <input type="text" id="name">
+        
+        <label for="day">날짜 검색 :</label>
+        <input type="text" id="day" [(ngModel)]="approvalStartDate"> ~
+        <input type="text" [(ngModel)]="approvalEndDate">
+        
+        <button type="button" (click)="list();">검색</button>
+        <!-- 셀렉트 박스 및 버튼들 -->
+        <div id="vacation_view_top_nav">
+         <label for="pageCount">전체 개수 :</label>
+          <select id="pageCount"  class="pure-input-1-2" [(ngModel)]="pageCount">
+            <option *ngFor="let count of pageCounts" [value]="count"  >{{count}}</option>
+          </select>
+          <select id="approval" class="pure-input-1-2"
+          [(ngModel)]="approval">
+            <option *ngFor="let approval of approvals" [value]="approval" [ngSwitch]="approval">
+              <span *ngSwitchCase="0">전체보기</span>
+              <span *ngSwitchCase="1">기안</span>
+              <span *ngSwitchCase="2">승인</span>
+              <span *ngSwitchCase="3">반려</span>
+              
+            </option>
+          </select>
+          <!--<select id="department" class="pure-input-1-2"
+          [(ngModel)]="department" (click)="departmentClick()">
+            <option *ngFor="let department of departments" [value]="department" [ngSwitch]="department">
+              <span *ngSwitchCase="'0'">전체보기</span>
+              <span *ngSwitchCase="'1'">개인목록</span>
+              <span *ngSwitchCase="'2'">부서목록</span>
+            </option>
+          </select>-->
+
+          <button id="reverseCheckbox" class="button button-3d" (click)="checkBox()">전체선택</button>
+          <button class="button button-3d" (click)="popupAdd(true)">휴가 등록</button>
+          <button class="button button-3d" (click)="deleteDepartment()">휴가 삭제</button>
+        </div>
+      </div>
+    </div>
+    <div id="main_view_bottom">
+      <table class="responstable">
+        <tr>
+          <!--<th style="width:5%;"><input type="checkbox" (click)="checkBox()" [(ngModel)]="tableCheck"></th>-->
+          <th style="%">No</th>
+          <th style="width:14%;">직원명</th>
+          <th style="width:14%;">휴가 종류</th>
+          <!--<th style="width:14%;">시작 일</th>
+          <th style="width:14%;">종료 일</th>-->
+          <th style="width:14%;">요청 일</th>
+          <th style="width:14%;">승인 여부</th>
+          <th style="width:20%;">삭제</th>
+        </tr>
+        
+        <tr *ngFor="let list of approvalList" >
+          <td><input type="checkbox" data-id="{{list.code}}" #approvalCheckbox/></td>
+          <td><a (click)="popupView(true,list.code)">{{list.request_employee_id}}</a></td>
+          <td [ngSwitch]="list.type">
+            <span *ngSwitchCase="1">반차</span>
+            <span *ngSwitchCase="2">연차</span>
+            <span *ngSwitchCase="3">공가</span>
+          </td>
+          <td>{{list.request_date}}</td>
+          <td [ngSwitch]="list.approval_data.ApprovalYn">
+            <span *ngSwitchCase="'Y'">승인</span>
+            <div *ngSwitchCase="'N'">
+              <span>미승인</span>
+              <input *ngIf="list.request_employee_id != list.approval_employee_id" type="button" value="승인하기" (click) ="popupYNView(true,list.code)" />
+            </div>
+            <!--<span *ngSwitchCase="'N'">미승인</span>-->
+          </td>
+          <td [ngSwitch]="list.approval_data.ApprovalYn">
+            <input *ngSwitchCase="'N'" type="button" value="수정"
+            (click)="popupEdit(true,list.code)" />
+            <input *ngSwitchCase="'N'" type="button" value="삭제" (click)="delete(list.code)"/>
+          </td>
+        </tr>
+      </table>
+      <!-- pager -->
+      <div style="margin-left:36%;">
+        <ul *ngIf="pager.pages && pager.pages.length" id="pagination" class="pagination">
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(1)">First</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}">
+                <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                <a (click)="setPage(page)">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.currentPage + 1)">Next</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                <a (click)="setPage(pager.totalPages)">Last</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet>
+  <app-vacation-add *ngIf="addView"></app-vacation-add>
+  <app-vacation-view *ngIf="viewView" [vacationCode]="vacationCode" (changViewEditReverse)="reverseView($event)"></app-vacation-view>
+  <app-vacation-edit *ngIf="editView" [vacationCode]="vacationCode"></app-vacation-edit>
+  <app-approval-review *ngIf="appYNView" [vacationCode]="vacationCode" ></app-approval-review>
+</router-outlet>

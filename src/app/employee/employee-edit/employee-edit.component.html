@@ -1,0 +1,106 @@
+<!-- 관리자 사원 수정 팝업창 -->
+    <div id="EmployeeEditPopUp" class="overlay">
+      <div class="popup">
+          <h2>- 사원 수정 -</h2>
+          <button class="close" (click)="editView()">&times;</button>
+          <div class="EmployeeAdd">
+              <div id="EmployeePhoto" class="employee_add_flex" >
+                <div class="employee_thumbnail">
+                  <img src="images/employee.png" class="thumbnail_size">
+                </div>
+                <div id="filePath">
+                    <input type="file">
+                </div>
+              </div>
+              
+              <div id="EmployeeAddInfo" class="employee_add_flex" >
+                  <form class="pure-form pure-form-stacked">
+                    <fieldset>
+                      <div class="pure-g">
+                       
+                        <div class="pure-u-1-2">
+                          <label for="EmployeeName">이름 </label>
+                          <input type="text" id="employeeName" name="EmployeeName" class="pure-u-23-24" placeholder="Name" [(ngModel)]="employeeEdit.EmployeeName" >
+                        </div>
+                        <div class="pure-u-1-2">
+                          <label for="gender">성별 </label>
+                          <select id="gender" name="EmployeeGender" class="pure-input-1" style="height:52%;" [(ngModel)]="employeeEdit.EmployeeGender">
+                            <option *ngFor="let gender of genderOption" [value]="gender"  >{{gender}}</option>
+                          </select>
+                        </div>
+                        
+                        <div class="pure-u-1">
+                          <label for="birth">생년월일</label>
+                          <select id="birth" name="birth_year" class="pure-input-1-3" style="display:inline;" [(ngModel)]="year" (ngModelChange)="monthOptionInit()">
+                            <option *ngFor="let year of yearOption" [value]="year">{{year}}</option>
+                          </select>
+                          <select id="birth" name="birth_month" class="pure-input-1-4" style="display:inline;" [(ngModel)]="month" (ngModelChange)="dayOptionInit(month)">
+                            <option *ngFor="let month of monthOption" [value]="month">{{month}}</option>
+                          </select>
+                          <select id="birth" name="birth_day" class="pure-input-1-4" style="display:inline;" [(ngModel)]="day" (ngModelChange)="birthInit()">
+                            <option *ngFor="let day of dayOption" [value]="day">{{day}}</option>
+                          </select>
+                        </div>
+                        
+                        <div class="pure-u-1">
+                          <label for="phone">전화번호</label>
+                          <select id="phone" name="phoneFirst" class="pure-input-1-4" style="display:inline;" [(ngModel)]="phoneFirst"
+                           (ngModelChange)="phoneChange()" >
+                            <option *ngFor="let phone of phoneOption" [value]="phone">{{phone}}</option>
+                          </select>
+                          <input type="text" id="phone" name="phone_second" class="pure-input-1-4" style="display:inline;" [(ngModel)]="phoneSecond" (ngModelChange)="phoneChange()" maxlength="4" size="4">
+                          <input type="text" id="phone" name="phone_third" class="pure-input-1-4" style="display:inline;" 
+                          [(ngModel)]="phoneThird" (ngModelChange)="phoneChange()" maxlength="4" size="4">
+                        </div>
+                        
+                        <div class="pure-u-1">
+                          <label for="email">E-mail</label>
+                          <input type="email" id="email" name="EmployeeEmail" class="pure-input-1-2" placeholder="E-mail" style="display:inline;" [(ngModel)]="employeeEdit.EmployeeEmail">
+                          <button class="button-secondary pure-button" (click)="emailCheck()">검사</button>
+                          <span [ngClass]="emailFlag" >&nbsp; &nbsp;{{emailText}}</span>
+                        </div>
+                        
+                        <div class="pure-u-1">
+                          <label for="join">입사년도</label>
+                          <!--<select id="join" name="join_year" class="pure-input-1-3" style="display:inline;"></select>-->
+                          <!--<select id="join" name="join_month" class="pure-input-1-4" style="display:inline;"></select>-->
+                          <!--<select id="join" name="join_day" class="pure-input-1-4" style="display:inline;"></select>-->
+                        </div>
+                        
+                        <div class="pure-u-1-2">
+                          <label for="department">부서 </label>
+                          <select id="department" name="EmployeeDepartment" class="pure-input-1-2" style="display:inline; height:52%;" [(ngModel)]="employeeEdit.EmployeeDepartment">
+                            <option *ngFor="let department of departments" [value]="department">{{department}}</option>
+                          </select>
+                        </div>
+                        <div class="pure-u-1-2">
+                          <label for="position">직급 </label>
+                          <select id="position" name="EmployeePosition" class="pure-input-1-2" style="display:inline;height:52%;" [(ngModel)]="employeeEdit.EmployeePosition">
+                            <option *ngFor="let position of positions" [value]="position">{{position}}</option>
+                          </select>
+                        </div>
+                        
+                        <div class="pure-u-1">
+                          <label for="address">주소</label>
+                          <input type="text" id="address" name="EmployeeAddressfirst" class="pure-input-1-1" style="display:inline;" [(ngModel)]="employeeEdit.EmployeeZipcode">
+                          <input type="text" id="address" name="EmployeeAddressNameOne" class="pure-input-1-2" style="display:inline;" [(ngModel)]="addressFirst" (ngModelChange)="addressinit()">
+                          <input type="text" id="address" name="EmployeeAddressNameTwo" class="pure-input-1-3" style="display:inline;" [(ngModel)]="addressSecond" (ngModelChange)="addressinit()">
+                        </div>
+                        
+                        <div class="pure-u-1">
+                          <label for="salary">연봉</label>
+                          <input type="number" id="salary" name="EmployeeSalary" class="pure-input-1-1" style="display:inline;" [(ngModel)]="employeeEdit.EmployeeSalary">
+                        </div>
+                      </div>
+                      <br /><br />
+                      <button class="button-success pure-button" (click)="passwordChange()">
+                        비밀번호 변경
+                      </button>
+                      <button (click)="employeeEditHttp()" class="button-success pure-button" style="margin-left:135px;">사원 수정</button>
+                    </fieldset>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- 관리자 사원 수정 팝업창 -->

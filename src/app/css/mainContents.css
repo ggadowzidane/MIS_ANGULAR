@@ -1,0 +1,63 @@
+#main_content{
+}
+
+#main_title{
+  margin-top : 20px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  font-size: 20px;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+#main_view #main_view_bottom{ 
+  margin :10px;
+}
+
+/* 사원 리스트 상단 navigation*/
+#main_view_top_nav{
+  margin-top : 20px;
+  margin-right: -3%;
+  text-align: right;
+}
+
+/* 버튼 inline으로 변경 */
+.pure-form{
+  display: inline;
+}
+
+.main_view_bottom_employeelist{
+  background-color: aliceblue;
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.employe_info_flex{
+  margin:20px;
+  height:250px;
+  flex-basis: 300px;
+  background-color:white;
+  color:black;
+  border:1px solid white;
+  flex-grow:1;
+  
+}
+
+.employee_thumbnail{
+  margin-left:10px;  
+  width:200px;
+  float:left;
+}
+
+.thumbnail_size{
+  margin-top:10px;
+  width:200px;
+  
+}
+
+.employee_info{
+  width: 130px;
+  height: 150px;
+  margin-left: 220px;
+  margin-top: 75px;  
+}

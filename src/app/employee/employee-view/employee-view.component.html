@@ -1,0 +1,82 @@
+<!-- 관리자 사원 조회 팝업창 -->
+    <div id="EmployeeViewPopUp" class="overlay">
+      <div class="popup">
+          <h2>- 사원 조회 -</h2>
+          <button class="close" (click)="viewView()">&times;</button>
+          <div class="EmployeeAdd">
+              <div id="EmployeePhoto" class="employee_add_flex" >
+                <div class="employee_thumbnail">
+                  <img src="images/employee.png" class="thumbnail_size">
+                </div>
+                <div id="filePath">
+                    <input type="file">
+                </div>
+              </div>
+              
+              <div id="EmployeeAddInfo" class="employee_add_flex">
+                      <div class="pure-g">
+                       
+                        <div class="pure-u-1-2">
+                          <label for="EmployeeName">이름: </label>
+                          <span id="EmployeeName">{{employee.name}}</span>
+                        </div>
+                        <div class="pure-u-1-2">
+                          <label for="gender">성별: </label>
+                          <span id="gender">{{employee.gender}}</span>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                        <div class="pure-u-1">
+                          <label for="birth">생년월일:</label>
+                          <span id="birth">{{employee.birth}}</span>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                        <div class="pure-u-1">
+                          <label for="phone">전화번호:</label>
+                          <span id="phone">>{{employee.phone}}</span>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                        <div class="pure-u-1">
+                          <label for="email">E-mail:</label>
+                          <span id="email">{{employee.email}}</span>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                        <div class="pure-u-1">
+                          <label for="join">입사년도:</label>
+                          <span id="foin">{{employee.join_yyyymm}}</span>
+                        </div>
+                      
+                        <br />
+                        <div class="pure-u-1-2">
+                          <label for="department">부서: </label>
+                          <span id="department">{{employee.department}}</span>
+                        </div>
+                        <div class="pure-u-1-2">
+                          <label for="position">직급: </label>
+                          <span id="position">{{employee.position}}</span>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                        <div class="pure-u-1">
+                          <label for="address">주소: </label>
+                          <span id="address">{{employee.address}}</span>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                        <div class="pure-u-1">
+                          <label for="salary">연봉: </label>
+                          <span id="salary">{{employee.salary}}</span>
+                        </div>
+                      </div>
+                      <br /><br />
+                      <button class="button-success pure-button" style="margin-left:100px;" (click)="viewReverse()">수정</button>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <button class="button-warning pure-button" (click)="employeeDelete()">삭제</button>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- 관리자 사원 조회 팝업창 -->

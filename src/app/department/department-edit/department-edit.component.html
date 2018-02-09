@@ -1,0 +1,29 @@
+<div id="DepartmentEditPopUp" class="overlay">
+  <div class="popup">
+    <h2>- 사원 수정 -</h2>
+    <button class="close" (click)="editView()">&times;</button>
+    
+    <form class="pure-form pure-form-stacked">
+      <fieldset>
+        <div class="pure-g">
+          <div class="pure-u-1">
+            <label for="name">부서 명</label>
+            <input type="text" id="name" name="DepartmentName" class="pure-input-1-2" placeholder="부서 명" style="display:inline;" [(ngModel)]="departmentEdit.DepartmentName">
+          </div>
+          <div class="pure-u-1">
+            <label for="representation">부서 대표</label>
+              <input type="text" id="representation" name="DepartmentrepResentation" class="pure-input-1-2" placeholder="부서 대표" style="display:inline;" [(ngModel)]="departmentEdit.DepartmentRepresentation">
+            </div>
+          <div class="pure-u-1">
+            <label for="description">부서 설명</label>
+            <textarea rows="8" cols="50" id="description" name="DepartmentDescription"
+              [(ngModel)]="departmentEdit.DepartmentDescription"></textarea>
+          </div>
+          <br /><br />
+          <button (click)="departmentEditCall()" class="button-success pure-button" style="margin-left:135px;">저 장</button>
+          <button (click)="editView()" class="button-success pure-button" style="margin-left:135px;">닫 가</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
